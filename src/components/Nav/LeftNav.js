@@ -72,10 +72,17 @@ export default class LeftNav extends Component {
 
   openlv3Menu (evt) {
     console.log(evt)
-    this.setState({
-      collapsedlv3: false,
-      selectedLv2Menu: evt
-    });
+    if(evt && evt.submenus && evt.submenus.length) {
+      this.setState({
+        collapsedlv3: false,
+        selectedLv2Menu: evt
+      });
+    } else {
+      this.setState({
+        collapsedlv3: true,
+        selectedLv2Menu: {}
+      });
+    }
   }
 
   collapsedlv3Menu() {
