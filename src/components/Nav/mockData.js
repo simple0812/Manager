@@ -427,9 +427,9 @@ function resolveHierarchical(data, menu) {
 }
 
 function hierarchical(data) {
-  var lv1Raw = data.filter(each => each.parentId == 0).map(each => { each.submenus =[]; return each});
-
   var lv1 = [];
+  
+  var lv1Raw = data.filter(each => each.parentId == 0).map(each => { each.submenus =[]; return each});
 
   lv1Raw.forEach((o, i) => {
     var p = {};

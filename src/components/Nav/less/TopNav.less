@@ -1,6 +1,6 @@
 @import "~sprite.less";
 
-.topnav { width: inherit; height: 60px; border-bottom: 5px solid #283444; text-align: right;  }
+.topnav { width: 100%; height: 60px; border-bottom: 5px solid #283444; text-align: right; position:fixed; top:0px; right:0px; z-index:99; background:white;}
 .topnav-addr {margin-right: 5px;}
 .topnav-temp {margin-right: 5px; color:#ff7e00;}
 .topnav-date {margin-right: 5px;}
@@ -11,7 +11,7 @@
 .topnav-hint { position: relative; width:60px; height: 60px; line-height: 60px; display: inline-block; text-align: center;vertical-align: middle; }
 .topnav-hint:hover {background:#283444;}
 .topnav-hint:hover svg {-webkit-filter:invert(1);filter:invert;}
-.topnav-hint .hint-box {border: 1px solid #e3e9ed;  position: absolute; top: 60px; right: 0; width:290px; display:none; }
+.topnav-hint .hint-box {border: 1px solid #e3e9ed;  position: absolute; top: 60px; right: 0; width:290px; display:none;background:white; }
 .topnav-hint:hover .hint-box {display:block;}
 .topnav-hint .hint-box ul { margin-top: 25px;}
 .topnav-hint .hint-box ul li {text-align: left; padding-left:25px; color: #666;  position: relative; height: 40px;}
@@ -35,7 +35,7 @@
 .topnav-user .topnav-userpic { width:36px; height:36px; border:2px solid #283444; border-radius: 18px; margin-top:10px; margin-left:10px; .sprite(@person)}
 .topnav-user:hover {background:#283444}
 
-.topnav-user .user-box {border: 1px solid #e3e9ed;  position: absolute; font-size: 12px; color: #6a6a6a; top: 60px; right: 0; width:150px; text-align: left; display:none;}
+.topnav-user .user-box {border: 1px solid #e3e9ed;  position: absolute; font-size: 12px; color: #6a6a6a; top: 60px; right: 0; width:150px; text-align: left; display:none; background:white;}
 .topnav-user:hover .user-box {display:block;}
 .topnav-user .user-box ul li { color: #747474; line-height:30px; }
 .topnav-user .user-box ul li:hover { color: #fff; background:#283444;}
