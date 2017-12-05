@@ -1,0 +1,20 @@
+@import "~sprite.less";
+
+.upgrade-container { min-width: 945px; margin:0 auto; }
+.img-hint-container {position: relative; margin:0 auto; width: 533px; margin-top: 40px;}
+.img-upgrade {margin-bottom: 20px; .sprite(@upgrade);}
+.img-upgrade-now {position: absolute; top: 0px; left:156px;.sprite(@upgrade-now);}
+.img-upgrade-hint {position: absolute; right: 0px; top:40px;.sprite(@upgrade-hint);}
+.img-hint-container p {text-align: center; font-size: 12px; color:#767676; line-height: 1.5;}
+
+.browser-container {width:790px; margin: 0 auto; zoom:1; overflow: hidden; display: block; margin-top: 65px; }
+.browser-container li {width: 150px; float: left; text-align: center; font-size: 12px;}
+.browser-container li div {margin:0 auto;}
+.browser-container li .chrome-browser {.sprite(@chrome);}
+.browser-container li .safari-browser {.sprite(@safari);}
+.browser-container li .firefox-browser {.sprite(@firefox);}
+.browser-container li .ie-browser {.sprite(@ie);}
+.browser-container li .opera-browser {.sprite(@opera);}
+.browser-container li p {font-weight: 600; color:#505051; margin-top: 25px; margin-bottom: 35px;}
+.browser-container li a {color:#767676; cursor: pointer; text-decoration: none;}
+.upgrade-bottom {width:790px; margin:0 auto; font-size: 10px; color:#767676;text-align:center; margin-top:40px; margin-bottom:20px; }

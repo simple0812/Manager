@@ -4,6 +4,8 @@ import { browserHistory } from 'react-router';
 import LvlMenu from './Lv1Menu';
 import Lv3Menu from './Lv3Menu';
 
+import $ from 'jquery';
+
 const Search = Input.Search;
 
 import styles from './less/LeftNav.less';
@@ -102,15 +104,19 @@ export default class LeftNav extends Component {
   }
 
   calcWidth() {
+    var w = 200;
     if(this.state.collapsed && this.state.collapsedlv3)  {
-      return 50;
+      w = 50;
     } else if ( this.state.collapsedlv3 && !this.state.collapsed) {
-      return 200;
+      w = 200;
     } else if ( !this.state.collapsedlv3 &&  this.state.collapsed) {
-      return 250;
+      w = 250;
     } else {
-      return 400;
+      w = 400;
     }
+
+    $('.right-container').css('left', w);
+    return w;
   }
 
   calcToggleBtnLeft() {
