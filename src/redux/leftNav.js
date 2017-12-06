@@ -2,7 +2,8 @@ import ReduxReqs from 'redux-reqs';
 import axios from 'axios';
 import Api from '../configs/api';
 import Immutable from 'immutable';
-import { all,takeLatest,put } from 'redux-saga/effects';
+import { all, takeLatest, put } from 'redux-saga/effects';
+import menus from './mockMenus.js';
 
 const initialState = Immutable.fromJS({
   code: 'error',
@@ -19,11 +20,7 @@ if (__DEV__) {
   let data = Mock.mock({
     "status": 200,  // 状态码
     "data|0-9": {
-      "id": "@guid",
-      "name": "@cname",
-      "address": "@county(true)",
-      "website": "@url",
-      "email": "@email"
+      "list": menus
     },     // 数据内容
     "code": "001",  // 业务返回码
     "message": ""   // 消息文本（有业务返回码时，此字段可不显示）
@@ -45,9 +42,11 @@ reduxReqs
 
 /*****************redux start**********************/
 function asyncReducer(state = initialState, action={}) {
-  console.log('asyncReducer==>', action.type, state, action.meta)
+  console.log('asyncReducer==>', action.type, action.meta)
   switch (action.type) {
-  case 'ASYNC_GETMENUS_SUCCESS' : return Immutable.fromJS(action.meta);
+  case 'ASYNC_GETMENUS_SUCCESS' : {
+    return Immutable.fromJS(action.meta);
+  }
   case 'ASYNC_GETMENUS_ERROR' : return Immutable.fromJS(action.meta);
   default:
       return state;
@@ -61,8 +60,9 @@ function asyncReducer(state = initialState, action={}) {
 function* getDataAsync(action) {
   var p = yield axios.get(Api.getData)
   console.log('getDateAsync=>', p)
-  if(p.status === 200) {
-    yield put({type: 'ASYNC_GETMENUS_SUCCESS', meta:p.date});
+  yield put({type: 'ASYNC_GETMENUS_SUCCESS', meta:p});
+  if(p.status === 200 && p.data && p.data.list) {
+    yield put({type: 'ASYNC_GETMENUS_SUCCESS', meta:p.data.list});
   } else {
     yield put({type: 'ASYNC_GETMENUS_ERROR', meta:p.message});
   }

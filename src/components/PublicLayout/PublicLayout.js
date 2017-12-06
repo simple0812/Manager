@@ -4,6 +4,7 @@ import { Layout, Menu, Row, Col } from 'antd';
 import LeftNav from '../Nav/LeftNav';
 import TopNav from '../Nav/TopNav';
 import mockData from '../Nav/mockData';
+import mockMenus from '../../redux/mockMenus';
 
 class PublicLayout extends React.Component {
 
@@ -24,7 +25,7 @@ class PublicLayout extends React.Component {
     return (
       <div className="parent-container">
         <div className="left-container">
-          <LeftNav dataSource={mockData}/>
+          <LeftNav dataSource={mockMenus}/>
         </div>
         <div className="right-container">
             <TopNav />

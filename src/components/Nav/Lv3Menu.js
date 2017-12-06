@@ -20,11 +20,12 @@ export default class Lv3Menu extends Component {
     
   }
 
-  initMenu(navItems) {
+  initMenu(navItems, parentMenuId) {
     var _this = this;
     if(!navItems) return;
-    return navItems.map((o, i) => {
-      return <Lv4Menu key={o.id} dataSource={o} />
+    var lv3Menus = navItems.filter(each => each.ParentId == parentMenuId);
+    return lv3Menus.map((o, i) => {
+      return <Lv4Menu key={o.AppId} dataSource={navItems} parentMenu ={o} />
     })
   }
 
@@ -36,13 +37,13 @@ export default class Lv3Menu extends Component {
           <div className='v3menu'>
             <div className='v3menu-header'>
               <span >
-                <Icon type={this.props.dataSource.icon} />
-                <strong>{this.props.dataSource.name}</strong>
+                <Icon type={this.props.parentMenu.Icon} />
+                <strong>{this.props.parentMenu.FullName}</strong>
               </span>
             </div>
 
             <ul>
-              {this.initMenu(this.props.dataSource.submenus)}
+              {this.initMenu(this.props.dataSource, this.props.parentMenu.AppId)}
             </ul>
           </div>
         </div>

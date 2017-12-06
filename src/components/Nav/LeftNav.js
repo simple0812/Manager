@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import React, { Component } from 'react'
 import { Menu, Icon, Button, Input  } from 'antd';
 import { browserHistory } from 'react-router';
@@ -14,7 +15,7 @@ const SubMenu = Menu.SubMenu;
 
 function requestGetMenus() {
   return {
-    type: 'ASYNC_ASYNCx',
+    type: 'ASYNC_REQ_GETMENUS',
     meta:'xx'
   };
 }
@@ -23,7 +24,7 @@ import {
   Link
 } from 'react-router-dom'
 
-export default class LeftNav extends Component {
+class LeftNav extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,6 +36,7 @@ export default class LeftNav extends Component {
   }
 
   componentDidMount() {
+    this.props.requestGetMenus()
   }
 
   initNav(navItems) {
@@ -55,8 +57,14 @@ export default class LeftNav extends Component {
 
   initMenu(navItems) {
     var _this = this;
-    return navItems.map((o, i) => {
-      return <LvlMenu selectedLv2Menu={this.state.selectedLv2Menu} key={o.id} dataSource={o} collapsed={_this.state.collapsed} onOpenlv3Menu={_this.openlv3Menu.bind(this)}/>
+    var lv1Menus = navItems.filter(each => each.ParentId == 0);
+    return lv1Menus.map((o, i) => {
+      return <LvlMenu selectedLv2Menu={this.state.selectedLv2Menu} 
+      key={o.AppId} 
+      parentMenu={o}
+      dataSource={navItems} 
+      collapsed={_this.state.collapsed} 
+      onOpenlv3Menu={_this.openlv3Menu.bind(this)}/>
     })
   }
 
@@ -84,7 +92,8 @@ export default class LeftNav extends Component {
 
   openlv3Menu (evt) {
     console.log(evt)
-    if(evt && evt.submenus && evt.submenus.length) {
+    var lv3Menus = this.props.dataSource.filter(each => each.ParentId == evt.AppId);
+    if(lv3Menus.length) {
       this.setState({
         collapsedlv3: false,
         selectedLv2Menu: evt
@@ -180,8 +189,19 @@ export default class LeftNav extends Component {
           collapsedlv3 ={this.state.collapsedlv3} 
           onCollapsedlv3Menu ={this.collapsedlv3Menu.bind(this)}
           collapsed={this.state.collapsed} 
-          dataSource={this.state.selectedLv2Menu}/>
+          parentMenu ={this.state.selectedLv2Menu}
+          dataSource={this.props.dataSource}/>
       </div>
     );
   }
 }
+
+export default connect(
+  (state) => {
+    console.log('(2) state',state.async.toJSON());
+    return {
+      asyncx: state.async.toJSON()
+    }
+  },
+  { requestGetMenus }
+)(LeftNav);

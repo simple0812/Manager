@@ -31,12 +31,13 @@ export default class Lv1Menu extends Component {
     });
   }
 
- initMenu(navItems) {
+ initMenu(navItems, parentMenuId) {
     var _this = this;
-    return navItems.map((o, i) => {
-      return <li key={o.id} className={this.props.selectedLv2Menu.id == o.id ? 'submenu-item active' : 'submenu-item'}
+    var lv2Menus = navItems.filter( each => each.ParentId ==parentMenuId );
+    return lv2Menus.map((o, i) => {
+      return <li key={o.AppId} className={this.props.selectedLv2Menu.AppId == o.AppId ? 'submenu-item active' : 'submenu-item'}
        onClick={_this.props.onOpenlv3Menu.bind(null, o)}>
-        <span>{o.name}</span>
+        <span>{o.FullName}</span>
       </li>
     })
   }
@@ -44,17 +45,17 @@ export default class Lv1Menu extends Component {
   render() {
     return (
       <li className={ this.state.active ? 'menu-item active': 'menu-item' }>
-        <Tooltip placement="right" title={this.props.dataSource.name}>
+        <Tooltip placement="right" title={this.props.parentMenu.FullName}>
           <span className={ this.props.collapsed ? 'menu-item__header-collapsed': 'menu-item__header' }
             onClick={this.togglelv1Menu.bind(this)}>
-            <Icon type={this.props.dataSource.icon} />
-            <strong>{this.props.dataSource.name}</strong>
+            <Icon type={this.props.parentMenu.Icon} />
+            <strong>{this.props.parentMenu.FullName}</strong>
             <Icon type={this.state.active ? 'down': 'right' } className='menu-item__header-icon'  style={{marginLeft:50}}/>
           </span>
         </Tooltip>
         <ul className={ this.props.collapsed ? 'submenu-collapsed': 'submenu' }>
           {
-            this.initMenu(this.props.dataSource.submenus)
+            this.initMenu(this.props.dataSource, this.props.parentMenu.AppId)
           }
         </ul>
       </li>
