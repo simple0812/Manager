@@ -201,6 +201,31 @@ class Common extends React.Component  {
                   </li>
                 </ul>
               </li>
+              <li className='birthday-content-item'>
+                <p className='birthday-department'>所属部门：电商客服部</p>
+                <ul>
+                  <li className='birthday-person'>
+                    <div></div>
+                    <p>韩梅梅</p>
+                    <p>10-09</p>
+                  </li>
+                  <li className='birthday-person'>
+                    <div></div>
+                    <p>韩梅梅</p>
+                    <p>10-09</p>
+                  </li>
+                  <li className='birthday-person'>
+                    <div></div>
+                    <p>韩梅梅</p>
+                    <p>10-09</p>
+                  </li>
+                  <li className='birthday-person'>
+                    <div></div>
+                    <p>韩梅梅</p>
+                    <p>10-09</p>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </Card>
         </Col>
