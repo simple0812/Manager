@@ -50,8 +50,8 @@ class Main extends React.Component  {
   }
   render() {
     return (
-      <div className='main-container'>
-      <Row>
+      <div className='main-container' style={{minWidth:800}}>
+      <Row >
         <Col span={6}>
           <Card style={{height:620}} className='notification-box' title={<b style={{fontSize:12, color:'#525252'}}>通知公告</b>} 
             extra={<a href="#" style={{ color: '#525252' }}>更多</a>} >

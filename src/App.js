@@ -23,6 +23,10 @@ import PageServerError from './components/PageServerError';
 import PageNetworkError from './components/PageNetworkError';
 import PageNotFound from './components/PageNotFound';
 import UpgradeBrowser from './components/UpgradeBrowser';
+import CustomSettings from './components/CustomSettings';
+import BasicInformation from './components/BasicInformation';
+import LoginBox from './components/LoginBox';
+
 import Async from './containers/Async';
 import styles from './components/app.less';
 
@@ -49,6 +53,9 @@ export default class App extends Component {
                 <Switch>
                     <Route exact path="/" component={Main} />
                     <Route exact path="/common" component={Common} />
+                    <Route exact path="/settings" component={CustomSettings} />
+                    <Route exact path="/basic" component={BasicInformation} />
+                    <Route exact path="/login" component={LoginBox} />
                     <Route exact path="/async" render={ (props) => (
                       <Bundle load={Async}>
                         { (Asyncs) => <Asyncs {...props} />}

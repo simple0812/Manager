@@ -1,7 +1,10 @@
 export { default as Async } from './Async';
+export { default as BasicInformation } from './BasicInformation';
 export { default as Bundle } from './Bundle';
 export { default as Common } from './Common';
+export { default as CustomSettings } from './CustomSettings';
 export { default as Icon } from './Icon';
+export { default as LoginBox } from './LoginBox';
 export { default as Main } from './Main';
 export { default as Metro } from './Metro';
 export { default as Nav } from './Nav';

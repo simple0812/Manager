@@ -50,7 +50,7 @@ class Common extends React.Component  {
   }
   render() {
     return (
-      <div className='main-container'>
+      <div className='main-container' style={{minWidth:800}}>
       <Row>
         <Col span={6}>
           <Card style={{height:600}} className='notification-box' title={<b style={{fontSize:12, color:'#525252'}}>通知公告</b>} 
