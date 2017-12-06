@@ -16,3 +16,4 @@ export { default as PageServerError } from './PageServerError';
 export { default as Placeholder } from './Placeholder';
 export { default as PublicLayout } from './PublicLayout';
 export { default as UpgradeBrowser } from './UpgradeBrowser';
+export { default as Workflow } from './Workflow';

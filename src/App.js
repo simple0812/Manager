@@ -5,7 +5,7 @@ import {
   Provider
 } from 'react-redux';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Switch,
   Redirect,
@@ -29,6 +29,7 @@ import BasicInformation from './components/BasicInformation';
 import LoginBox from './components/LoginBox';
 import PublicLayout from './components/PublicLayout';
 import EmptyLayout from './components/EmptyLayout';
+import Workflow from './components/Workflow';
 
 import Async from './containers/Async';
 import styles from './components/app.less';
@@ -59,6 +60,7 @@ export default class App extends Component {
             <RouteWithLayout exact  layout={PublicLayout} path="/common" component={Common}/>
             <RouteWithLayout exact  layout={PublicLayout} path="/settings" component={CustomSettings}/>
             <RouteWithLayout exact  layout={PublicLayout} path="/basic" component={BasicInformation}/>
+            <RouteWithLayout exact  layout={PublicLayout} path="/workflow" component={Workflow}/>
             
             <RouteWithLayout exact  layout={EmptyLayout} path="/login" component={LoginBox}/>
             <RouteWithLayout exact  layout={EmptyLayout} path="/upgradeBrowser" component={UpgradeBrowser}/>
