@@ -1,19 +1,30 @@
+// import React from 'react';
+// import Bundle from '../components/Bundle';
+// import Main from 'bundle-loader?name=entry!../components/Main';
+
+// export default (props) => (
+//     <Bundle load={Main}>
+//         { (Container) => <Container {...props} /> }
+//     </Bundle>
+// );
+
+
+
 import { connect } from 'react-redux';
 import Async from '../components/Async';
 // import { async } from '../redux/async';
 import Immutable from 'immutable';
 
 const mapStateToProps = (state) => {
-  console.log('(2) state',state.async.toJSON());
   return {
-    asyncx: state.async.toJSON()
+    menus: state.leftNav.toJSON()
   }
 };
 
 // redux流程发起者
 function async() {
   return {
-    type: 'ASYNC_ASYNCx',
+    type: 'ASYNC_REQ_GETMENUS',
     meta:'xx'
   };
 }

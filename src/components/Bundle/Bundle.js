@@ -18,12 +18,14 @@ class Bundle extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('nextProps**************>', nextProps)
     if (nextProps.load !== this.props.load) {
       this.load(nextProps)
     }
   }
 
   load(props) {
+    console.log('props==>', props)
     this.setState({
       mod: null
     })

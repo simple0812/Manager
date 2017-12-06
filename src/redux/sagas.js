@@ -1,6 +1,6 @@
 import ReduxReqs from 'redux-reqs';
 import { beginTask, endTask } from 'redux-nprogress';
-import { all } from 'redux-saga/effects';
+import { all,takeLatest,put } from 'redux-saga/effects';
 import { watchSagas as asyncSagas } from './async';
 
 
@@ -9,6 +9,7 @@ ReduxReqs.defaults = {
   afterAction: endTask(),
 };
 
+console.log('ab', asyncSagas[0])
 export default function* rootSaga() {
   yield all([
     ...asyncSagas

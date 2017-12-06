@@ -12,7 +12,7 @@ const initialState = Immutable.fromJS({
 });
 
 const reduxReqs = new ReduxReqs({
-  prefix: 'ASYNC'
+  prefix: 'LEFTNAV'
 });
 
 if (__DEV__) {
@@ -41,17 +41,14 @@ if (__DEV__) {
 }
 
 reduxReqs
-  .get('ASYNC', Api.getData);
-
-console.log('reduxReqs==>', reduxReqs)
-
-export const { async } = reduxReqs.getCreateActions();
+  .get('LEFTNAV', Api.getData);
 
 /*****************redux start**********************/
 function asyncReducer(state = initialState, action={}) {
   console.log('asyncReducer==>', action.type, state, action.meta)
   switch (action.type) {
-  case 'ASYNC_GETDATA' : return Immutable.fromJS(action.meta);
+  case 'ASYNC_GETMENUS_SUCCESS' : return Immutable.fromJS(action.meta);
+  case 'ASYNC_GETMENUS_ERROR' : return Immutable.fromJS(action.meta);
   default:
       return state;
   }
@@ -64,15 +61,14 @@ function asyncReducer(state = initialState, action={}) {
 function* getDataAsync(action) {
   var p = yield axios.get(Api.getData)
   console.log('getDateAsync=>', p)
-  yield put({type: 'ASYNC_GETDATA', meta:p});
+  if(p.status === 200) {
+    yield put({type: 'ASYNC_GETMENUS_SUCCESS', meta:p.date});
+  } else {
+    yield put({type: 'ASYNC_GETMENUS_ERROR', meta:p.message});
+  }
 }
 
-function* testFoo(action) {
-  console.log('watchSagas===>', action);
-  yield getDataAsync(action);//put(deleteWebsitesSuccess(action.ids));
-}
-
-function* testFoox(action) {
+function* requestGetMenus(action) {
   console.log('watchSagas===>', action);
   yield getDataAsync(action);//put(deleteWebsitesSuccess(action.ids));
 }
@@ -83,7 +79,6 @@ export default asyncReducer;
 // export default reduxReqs.getReducers();
 
 export const watchSagas = [
-  takeLatest('ASYNC_ASYNC', testFoo),
-  takeLatest('ASYNC_ASYNCx', testFoox),
+  takeLatest('ASYNC_REQ_GETMENUS', requestGetMenus),
 ];
 // export const watchSagas = reduxReqs.getWatchSagas();

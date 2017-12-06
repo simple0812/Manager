@@ -66,6 +66,12 @@ export default class App extends Component {
             <RouteWithLayout exact  layout={EmptyLayout} path="/upgradeBrowser" component={UpgradeBrowser}/>
             <RouteWithLayout exact  layout={EmptyLayout} path="/pageServerError" component={PageServerError}/>
             <RouteWithLayout exact  layout={EmptyLayout} path="/pageNetworkError" component={PageNetworkError}/>
+
+            <Route exact path="/async" render={ (props) => (
+              <Bundle load={Async}>
+                { (Asyncs) => <Asyncs {...props} />}
+              </Bundle>
+            ) } />
             <Route component={PageNotFound} />
           </Switch>
         </Router>

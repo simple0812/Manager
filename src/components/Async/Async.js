@@ -13,7 +13,6 @@ class Async extends React.Component {
 
   constructor(props) {
     super(props);
-
   }
 
   componentDidMount() {
@@ -25,7 +24,7 @@ class Async extends React.Component {
 
     return (
       <div>
-        Async
+        Asyncxxxx->{this.props.asyncx.code}
         { console.log('(3) props',props) }
       </div>
     );

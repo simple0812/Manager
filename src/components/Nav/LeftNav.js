@@ -12,6 +12,13 @@ import styles from './less/LeftNav.less';
 
 const SubMenu = Menu.SubMenu;
 
+function requestGetMenus() {
+  return {
+    type: 'ASYNC_ASYNCx',
+    meta:'xx'
+  };
+}
+
 import {
   Link
 } from 'react-router-dom'
@@ -25,6 +32,9 @@ export default class LeftNav extends Component {
       collapsedlv3: true,
       selectedLv2Menu:{}
     }
+  }
+
+  componentDidMount() {
   }
 
   initNav(navItems) {

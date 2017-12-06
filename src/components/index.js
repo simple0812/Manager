@@ -4,7 +4,6 @@ export { default as Bundle } from './Bundle';
 export { default as Common } from './Common';
 export { default as CustomSettings } from './CustomSettings';
 export { default as EmptyLayout } from './EmptyLayout';
-export { default as Home } from './Home';
 export { default as Icon } from './Icon';
 export { default as LoginBox } from './LoginBox';
 export { default as Main } from './Main';
