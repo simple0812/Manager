@@ -24,7 +24,7 @@ class LoginBox extends React.Component {
     return (
       <div className='login-box-container'>
         <div className='login-box'>
-          <div>
+          <div className='logo-container'>
             <div className='logo'></div>
             <div className='txtlogo'></div>
           </div>
@@ -33,13 +33,18 @@ class LoginBox extends React.Component {
                 <div className='login-by-password'>
                   <Input placeholder="工号/手机号/邮箱" />
                   <Input placeholder="密码" />
-                  <p>忘记密码</p>
+                  <p className='forget-password'>忘记密码</p>
                   <p className='btn-login'>
                     登录
                   </p>
                 </div>
             </TabPane>
-            <TabPane tab="二维码登录" key="2">Content of Tab Pane 2</TabPane>
+            <TabPane tab="二维码登录" key="2">
+              <div className='login-by-qr'>
+                <div className='qr-icon'></div>
+                <p>手机扫码，安全登录</p>
+              </div>
+            </TabPane>
           </Tabs>
         </div>
         <div className='login-box-footer'>

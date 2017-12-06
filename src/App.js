@@ -8,6 +8,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  Redirect,
   withRouter,
 } from 'react-router-dom';
 import './utils/axios';
@@ -26,6 +27,8 @@ import UpgradeBrowser from './components/UpgradeBrowser';
 import CustomSettings from './components/CustomSettings';
 import BasicInformation from './components/BasicInformation';
 import LoginBox from './components/LoginBox';
+import PublicLayout from './components/PublicLayout';
+import EmptyLayout from './components/EmptyLayout';
 
 import Async from './containers/Async';
 import styles from './components/app.less';
@@ -37,38 +40,33 @@ import rootSaga from './redux/sagas';
 const store = configureStore();
 store.runSaga(rootSaga);
 
+function RouteWithLayout({layout, component, ...rest}){
+  return (
+    <Route {...rest} render={(props) =>
+      React.createElement( layout, props, React.createElement(component, props))
+    }/>
+  );
+}
+
 
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-
-        <div className="parent-container">
-          <div className="left-container">
-            <LeftNav dataSource={mockData}/>
-          </div>
-          <div className="right-container">
-              <TopNav />
-              <Router>
-                <Switch>
-                    <Route exact path="/" component={Main} />
-                    <Route exact path="/common" component={Common} />
-                    <Route exact path="/settings" component={CustomSettings} />
-                    <Route exact path="/basic" component={BasicInformation} />
-                    <Route exact path="/login" component={LoginBox} />
-                    <Route exact path="/async" render={ (props) => (
-                      <Bundle load={Async}>
-                        { (Asyncs) => <Asyncs {...props} />}
-                      </Bundle>
-                    ) } />
-                    <Route exact path="/upgradeBrowser" component={UpgradeBrowser} />
-                    <Route exact path="/pageServerError" component={PageServerError} />
-                    <Route exact path="/pageNetworkError" component={PageNetworkError} />
-                    <Route component={PageNotFound} />
-                </Switch>
-            </Router>
-          </div>
-        </div>
+        <Router>
+          <Switch>
+            <RouteWithLayout exact  layout={PublicLayout} path="/" component={Main}/>
+            <RouteWithLayout exact  layout={PublicLayout} path="/common" component={Common}/>
+            <RouteWithLayout exact  layout={PublicLayout} path="/settings" component={CustomSettings}/>
+            <RouteWithLayout exact  layout={PublicLayout} path="/basic" component={BasicInformation}/>
+            
+            <RouteWithLayout exact  layout={EmptyLayout} path="/login" component={LoginBox}/>
+            <RouteWithLayout exact  layout={EmptyLayout} path="/upgradeBrowser" component={UpgradeBrowser}/>
+            <RouteWithLayout exact  layout={EmptyLayout} path="/pageServerError" component={PageServerError}/>
+            <RouteWithLayout exact  layout={EmptyLayout} path="/pageNetworkError" component={PageNetworkError}/>
+            <Route component={PageNotFound} />
+          </Switch>
+        </Router>
           
       </Provider>
     );
