@@ -24,7 +24,14 @@ import {
   Link
 } from 'react-router-dom'
 
-class LeftNav extends Component {
+@connect(
+  (state) => {
+    return ({
+    });
+  },
+  {requestGetMenus} //调用的时候会触发对应的saga
+)  
+export default class LeftNav extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,21 +46,10 @@ class LeftNav extends Component {
     this.props.requestGetMenus()
   }
 
-  initNav(navItems) {
-  	var _this = this;
-  	return navItems.map((o, i) => {
-  		if(o.submenus && o.submenus.length) {
-  			return <SubMenu key={'sub'+o.id} mode="inline" title={<span><Icon type="mail" /><span>{o.name}</span></span>}>
-  			{ _this.initNav(o.submenus) }
-        </SubMenu>
-  		} else {
-  			return <Menu.Item key={o.id}>
-            <Icon type="pie-chart" />
-            <span>{o.name}</span>
-          </Menu.Item>
-  		}
-  	})
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps**************>', nextProps)
   }
+
 
   initMenu(navItems) {
     var _this = this;
@@ -91,7 +87,6 @@ class LeftNav extends Component {
   }
 
   openlv3Menu (evt) {
-    console.log(evt)
     var lv3Menus = this.props.dataSource.filter(each => each.ParentId == evt.AppId);
     if(lv3Menus.length) {
       this.setState({
@@ -179,7 +174,7 @@ class LeftNav extends Component {
           </ul>
         </div>
         <div className='btn-togglecontainer'
-          style={{ display: this.state.selectedLv2Menu.id ? 'block' : 'none', left: this.calcToggleBtnLeft() }}>
+          style={{ display: this.state.selectedLv2Menu.AppId ? 'block' : 'none', left: this.calcToggleBtnLeft() }}>
             <div style={{ display: this.state.collapsedlv3?'none':'block'}}
               className='collapsedlv3-button' onClick={this.collapsedlv3Menu.bind(this)}></div>
             <div style={{ display: this.state.collapsedlv3?'block':'none'}}
@@ -195,13 +190,3 @@ class LeftNav extends Component {
     );
   }
 }
-
-export default connect(
-  (state) => {
-    console.log('(2) state',state.async.toJSON());
-    return {
-      asyncx: state.async.toJSON()
-    }
-  },
-  { requestGetMenus }
-)(LeftNav);
